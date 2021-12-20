@@ -394,61 +394,86 @@ The **Test** library includes:
 ## Animation & Transition
 
 - [Back to Section Contents](#ui-components)
+- [Android Documentation](https://developer.android.com/jetpack/compose/animation)
 
 ---
+
+**Animation & Transition** provides a framework of APIs for animations, enter/exit transitions, physics, transformations, and keyframes.
 
 ---
 
 ## Auto
 
 - [Back to Section Contents](#ui-components)
+- [Android Documentation](https://developer.android.com/training/cars)
 
 ---
+
+**Auto** provides an optimized experience for vehicle displays and drivers using either Android Auto or Android Automotive OS and supports apps categories such as media, messaging, navigation, parking, and charging.
 
 ---
 
 ## Emoji
 
 - [Back to Section Contents](#ui-components)
+- [Android Documentation](https://developer.android.com/guide/topics/ui/look-and-feel/emoji-compat)
 
 ---
+
+**Emoji** (*EmojiCompat*) gives developers a library for backwards-compatibility support of Emojis by using a CharSequence and replaces Unicode sequences with an EmojiSpan if a device is running a version of Android that does not support the particular sequence.
 
 ---
 
 ## Fragment
 
 - [Back to Section Contents](#ui-components)
+- [Android Documentation](https://developer.android.com/guide/fragments)
 
 ---
+
+**Fragment** is a support Class that allows for the separation of UI components for modularity and reusability within an Activity.
 
 ---
 
 ## Layout
 
 - [Back to Section Contents](#ui-components)
+- [Android View](https://developer.android.com/guide/topics/resources/layout-resource)
+- [Compose View](https://developer.android.com/jetpack/compose/layouts/basics)
 
 ---
+
+**Layout** can either be defined as an XML resource file that contains ViewGroups and Views or as a Composable function which can accept child Composables as an argument.
 
 ---
 
 ## Palette
 
 - [Back to Section Contents](#ui-components)
+- [Android Documentation](https://developer.android.com/training/material/palette-colors)
 
 ---
+
+**Palette** is a support library that takes prominent colors from images (*Bitmap*) to aid in the creation and design of layout themes and custom colors.
 
 ---
 
 ## TV
 
 - [Back to Section Contents](#ui-components)
+- [Android Documentation](https://developer.android.com/training/tv/start)
 
 ---
+
+**TV** provides a way for developers to create applications optimized for devices for large screens like TVs.
 
 ---
 
 ## Wear
 
 - [Back to Section Contents](#ui-components)
+- [Android Documentation](https://developer.android.com/training/wearables)
 
 ---
+
+**Wear** provides a set of libraries for creating Wear OS applications.
