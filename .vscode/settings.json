@@ -2,9 +2,11 @@
     "cSpell.words": [
         "Appcompat",
         "Compat",
+        "Composables",
+        "lifecycles",
         "Dalvik",
         "Jetpack",
-        "Multidex",
-        "Composables"
+        "keyframes",
+        "Multidex"
     ]
 }
