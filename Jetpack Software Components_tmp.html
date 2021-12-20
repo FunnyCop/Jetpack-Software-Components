@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Jetpack Software Components.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="jetpack-software-components">Jetpack Software Components</h1>
+<ul>
+<li>
+<p><a href="#foundation-components">Foundation Components</a></p>
+<ul>
+<li><a href="#appcompat">AppCompat</a></li>
+<li><a href="#android-ktx">Android KTX</a></li>
+<li><a href="#test">Test</a></li>
+<li><a href="#multidex">Multidex</a></li>
+</ul>
+<br>
+</li>
+<li>
+<p><a href="#architecture-components">Architecture Components</a></p>
+<ul>
+<li><a href="#room">Room</a></li>
+<li><a href="#workmanager">WorkManager</a></li>
+<li><a href="#lifecycle">Lifecycle</a></li>
+<li><a href="#viewmodel">ViewModel</a></li>
+<li><a href="#livedata">LiveData</a></li>
+<li><a href="#navigation">Navigation</a></li>
+<li><a href="#paging">Paging</a></li>
+<li><a href="#data-binding">Data Binding</a></li>
+</ul>
+<br>
+</li>
+<li>
+<p><a href="#behavior-components">Behavior Components</a></p>
+<ul>
+<li><a href="#downloadmanager">DownloadManager</a></li>
+<li><a href="#media--playback">Media &amp; Playback</a></li>
+<li><a href="#permissions">Permissions</a></li>
+<li><a href="#notifications">Notifications</a></li>
+<li><a href="#sharing">Sharing</a></li>
+<li><a href="#slices">Slices</a></li>
+</ul>
+<br>
+</li>
+<li>
+<p><a href="#ui-components">UI Components</a></p>
+<ul>
+<li><a href="#animation--transition">Animation &amp; Transition</a></li>
+<li><a href="#auto">Auto</a></li>
+<li><a href="#emoji">Emoji</a></li>
+<li><a href="#fragment">Fragment</a></li>
+<li><a href="#layout">Layout</a></li>
+<li><a href="#palette">Palette</a></li>
+<li><a href="#tv">TV</a></li>
+<li><a href="#wear">Wear</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="foundation-components">Foundation Components</h1>
+<ul>
+<li><a href="#jetpack-software-components">Back to Top</a></li>
+<li><a href="#architecture-components">Architecture Components</a></li>
+<li><a href="#behavior-components">Behavior Components</a></li>
+<li><a href="#ui-components">UI Components</a></li>
+</ul>
+<br>
+<ul>
+<li><a href="https://www.geeksforgeeks.org/foundation-components-of-android-jetpack/">Geeks for Geeks</a></li>
+</ul>
+<hr>
+<ul>
+<li><a href="#appcompat">AppCompat</a></li>
+<li><a href="#android-ktx">Android KTX</a></li>
+<li><a href="#test">Test</a></li>
+<li><a href="#multidex">Multidex</a></li>
+</ul>
+<hr>
+<p><strong>Foundation Components</strong> are a set of core system components for Android Applications which include Kotlin language support, Testing utilities, and backwards compatibility support.</p>
+<hr>
+<h2 id="appcompat">AppCompat</h2>
+<ul>
+<li><a href="#foundation-components">Back to Section Contents</a></li>
+<li><a href="https://developer.android.com/jetpack/androidx/releases/appcompat">Android Documentation</a></li>
+</ul>
+<hr>
+<p>The <strong>AppCompat</strong> (Appcompat/appcompat) library contains key components for building Android Applications such as:</p>
+<p><strong>App Bars</strong> (<a href="https://developer.android.com/jetpack/compose/layouts/material#app-bars">Compose View</a>, <a href="https://developer.android.com/guide/navigation/navigation-ui#top_app_bar">Android View</a>)</p>
+<p><strong>Navigation Drawers</strong> (<a href="https://developer.android.com/jetpack/compose/layouts/material#drawers">Compose View</a>, <a href="https://developer.android.com/guide/navigation/navigation-ui#add_a_navigation_drawer">Android View</a>)</p>
+<p><strong>Permissions</strong> (<a href="https://developer.android.com/training/permissions/requesting">Requesting</a>, <a href="https://developer.android.com/training/permissions/declaring">Declaring</a>)</p>
+<p><strong>Resources</strong> (<a href="https://developer.android.com/jetpack/compose/resources">Compose View</a>, <a href="https://developer.android.com/guide/topics/resources/providing-resources">Android View</a>)</p>
+<p><strong>Dialog Boxes</strong> (<a href="https://www.geeksforgeeks.org/alertdialog-in-android-using-jetpack-compose/">Compose View</a>, <a href="https://developer.android.com/guide/topics/ui/dialogs">Android View</a>)
+<strong>Share Actions</strong> (<a href="https://developer.android.com/training/sharing/send">Simple Data</a>, <a href="https://developer.android.com/reference/kotlin/androidx/appcompat/widget/ShareActionProvider">ShareActionProvider</a>)</p>
+<hr>
+<h2 id="android-ktx">Android KTX</h2>
+<ul>
+<li><a href="#foundation-components">Back to Section Contents</a></li>
+<li><a href="#https://developer.android.com/kotlin/ktx">Android Documentation</a></li>
+</ul>
+<hr>
+<p>The <strong>Android KTX</strong> library contains <strong>Extension functions</strong>, <strong>Extension properties</strong>, <strong>Lambdas</strong>, <strong>Named parameters</strong>, <strong>Parameter default values</strong>, and <strong>Coroutines</strong> some of the modules include:</p>
+<p><strong>Fragment KTX</strong> (<a href="https://developer.android.com/kotlin/ktx#fragment">Android Documentation</a>)</p>
+<p><strong>Lifecycle KTX</strong> (<a href="https://developer.android.com/kotlin/ktx#lifecycle">Android Documentation</a>)</p>
+<p><strong>Navigation KTX</strong> (<a href="https://developer.android.com/kotlin/ktx#navigation">Navigation KTX</a>)</p>
+<p><strong>Room KTX</strong> (<a href="https://developer.android.com/kotlin/ktx#room">Android Documentation</a>)</p>
+<p><strong>ViewModel KTX</strong> (<a href="https://developer.android.com/kotlin/ktx#viewmodel">Android Documentation</a>)</p>
+<hr>
+<h2 id="test">Test</h2>
+<ul>
+<li><a href="#foundation-components">Back to Section Contents</a></li>
+<li><a href="https://developer.android.com/training/testing">Android Documentation</a></li>
+</ul>
+<hr>
+<p>The <strong>Test</strong> library includes:</p>
+<p><strong>Espresso UI</strong> for UI testing (<a href="https://developer.android.com/training/testing/espresso">Android Documentation</a>)</p>
+<p><strong>AndroidJUnitRunner</strong> for unit testing (<a href="https://developer.android.com/training/testing/junit-runner">Android Documentation</a>)</p>
+<hr>
+<h2 id="multidex">Multidex</h2>
+<ul>
+<li><a href="#foundation-components">Back to Section Contents</a></li>
+<li><a href="https://developer.android.com/jetpack/androidx/releases/multidex">Android Documentation</a></li>
+</ul>
+<hr>
+<p><strong>Multidex</strong> allows applications to be split across multiple <em>Dex</em> (executable) files which makes it possible to run larger applications (containing more than 65,536 methods) within the Android virtual machine (<em>Dalvik</em>) on devices running Android versions before Lollipop.</p>
+<hr>
+<h1 id="architecture-components">Architecture Components</h1>
+<ul>
+<li><a href="#jetpack-software-components">Back to Top</a></li>
+<li><a href="#foundation-components">Foundation Components</a></li>
+<li><a href="#behavior-components">Behavior Components</a></li>
+<li><a href="#ui-components">UI Components</a></li>
+</ul>
+<br>
+<ul>
+<li><a href="https://www.geeksforgeeks.org/jetpack-architecture-components-in-android/">Geeks for Geeks</a></li>
+</ul>
+<hr>
+<ul>
+<li><a href="#room">Room</a></li>
+<li><a href="#workmanager">WorkManager</a></li>
+<li><a href="#lifecycle">Lifecycle</a></li>
+<li><a href="#viewmodel">ViewModel</a></li>
+<li><a href="#livedata">LiveData</a></li>
+<li><a href="#navigation">Navigation</a></li>
+<li><a href="#paging">Paging</a></li>
+<li><a href="#data-binding">Data Binding</a></li>
+</ul>
+<hr>
+<p><strong>Architecture Components</strong> are libraries that make it easier for developers to deal with changes to data and lifecycles and local storage. They include tools for things like data binding, paging, navigation, and abstraction for local SQLite databases.</p>
+<hr>
+<h2 id="room">Room</h2>
+<ul>
+<li><a href="#architecture-components">Back to Section Contents</a></li>
+<li><a href="https://developer.android.com/training/data-storage/room">Android Documentation</a></li>
+</ul>
+<hr>
+<p><strong>Room</strong> provides an abstraction layer for SQLite and is used for persisting local data. It gives developers compile-time verification of SQL queries, annotations that minimize boilerplate code, and database migration paths. It requires an, <strong>Entity</strong> (Model), <strong>DAO</strong> (Data Access Object/Service), and a <strong>Database</strong> (instance of a Room DB).</p>
+<hr>
+<h2 id="workmanager">WorkManager</h2>
+<ul>
+<li><a href="#architecture-components">Back to Section Contents</a></li>
+<li><a href="https://developer.android.com/topic/libraries/architecture/workmanager">Android Documentation</a></li>
+</ul>
+<hr>
+<p><strong>WorkManager</strong> is an API for scheduling asynchronous tasks (single execution or repeatable) that will run even when the application is exits or if the device restarts when certain Work Constraints are met.</p>
+<hr>
+<h2 id="lifecycle">Lifecycle</h2>
+<ul>
+<li><a href="#architecture-components">Back to Section Contents</a></li>
+<li><a href="https://developer.android.com/topic/libraries/architecture/lifecycle">Android Documentation</a></li>
+</ul>
+<hr>
+<p><strong>Lifecycle</strong> allows developers to create lifecycle-aware components such as Activities, Fragments, and ViewModels.</p>
+<hr>
+<h2 id="viewmodel">ViewModel</h2>
+<ul>
+<li><a href="#architecture-components">Back to Section Contents</a></li>
+<li><a href="https://developer.android.com/topic/libraries/architecture/viewmodel">Android Documentation</a></li>
+</ul>
+<hr>
+<p><strong>ViewModel</strong> allows developers to store and manage UI-related data with actions scoped to component lifecycles and persists data through configuration changes. It also makes it easy to share data across Fragments and Composables.</p>
+<hr>
+<h2 id="livedata">LiveData</h2>
+<ul>
+<li><a href="#architecture-components">Back to Section Contents</a></li>
+<li><a href="https://developer.android.com/topic/libraries/architecture/livedata">Android Documentation</a></li>
+</ul>
+<hr>
+<p><strong>LiveData</strong> is a lifecycle-aware data holder Class that implements the observable pattern which ensures that components observers are only updated when in an active lifecycle state.</p>
+<hr>
+<h2 id="navigation">Navigation</h2>
+<ul>
+<li><a href="#architecture-components">Back to Section Contents</a></li>
+<li><a href="https://developer.android.com/guide/navigation">Android Documentation</a></li>
+</ul>
+<hr>
+<p><strong>Navigation</strong> contains a set of tools for implementing application navigation. It requires a <strong>Navigation graph</strong>, <strong>NavHost</strong>, and <strong>NavController</strong> and handles things like fragment transactions, standardized resources, and deep linking and provides a scope for ViewModels.</p>
+<hr>
+<h2 id="paging">Paging</h2>
+<ul>
+<li><a href="#architecture-components">Back to Section Contents</a></li>
+<li><a href="https://developer.android.com/topic/libraries/architecture/paging/v3-overview">Android Documentation</a></li>
+</ul>
+<hr>
+<p><strong>Paging</strong> is a library which eases the loading, caching, and display of pages of information from large datasets from local and remote storage.</p>
+<hr>
+<h2 id="data-binding">Data Binding</h2>
+<ul>
+<li><a href="#architecture-components">Back to Section Contents</a></li>
+<li><a href="https://developer.android.com/topic/libraries/data-binding">Android Documentation</a></li>
+</ul>
+<hr>
+<p><strong>Data Binding</strong> is a support library for binding UI components in layouts to application data sources in a declarative format.</p>
+<hr>
+<h1 id="behavior-components">Behavior Components</h1>
+<ul>
+<li><a href="#jetpack-software-components">Back to Top</a></li>
+<li><a href="#foundation-components">Foundation Components</a></li>
+<li><a href="#architecture-components">Architecture Components</a></li>
+<li><a href="#ui-components">UI Components</a></li>
+</ul>
+<br>
+<ul>
+<li><a href="https://www.geeksforgeeks.org/behaviour-components-of-android-jetpack/">Geeks for Geeks</a></li>
+</ul>
+<hr>
+<ul>
+<li><a href="#downloadmanager">DownloadManager</a></li>
+<li><a href="#media--playback">Media &amp; Playback</a></li>
+<li><a href="#permissions">Permissions</a></li>
+<li><a href="#notifications">Notifications</a></li>
+<li><a href="#sharing">Sharing</a></li>
+<li><a href="#slices">Slices</a></li>
+</ul>
+<hr>
+<p><strong>Behavior Components</strong> are libraries that handle user interaction with an application through the UI. They include tools for things like notifications, downloading, permissions, sharing, and the Google assistant.</p>
+<hr>
+<h2 id="downloadmanager">DownloadManager</h2>
+<ul>
+<li><a href="#behavior-components">Back to Section Contents</a></li>
+<li><a href="https://developer.android.com/reference/kotlin/android/app/DownloadManager?hl=en">Android Documentation</a></li>
+</ul>
+<hr>
+<p><strong>DownloadManager</strong> is a system service that handles long-running/large HTTP downloads in a background process.</p>
+<hr>
+<h2 id="media--playback">Media &amp; Playback</h2>
+<ul>
+<li><a href="#behavior-components">Back to Section Contents</a></li>
+<li><a href="https://developer.android.com/guide/topics/media-apps/media-apps-overview">Android Documentation</a></li>
+</ul>
+<hr>
+<p><strong>Media &amp; Playback</strong> represents a set of libraries for playing audio and video with support for backwards-compatibility which include:</p>
+<p><strong>Media3</strong> (<a href="https://developer.android.com/jetpack/androidx/releases/media3">Android Documentation</a>)</p>
+<p><strong>Media2</strong> (<a href="https://developer.android.com/jetpack/androidx/releases/media2">Android Documentation</a>)</p>
+<p><strong>Media</strong> (<a href="https://developer.android.com/jetpack/androidx/releases/media">Android Documentation</a>)</p>
+<p><strong>ExoPlayer</strong> (<a href="https://exoplayer.dev/">ExoPlayer Documentation</a>)</p>
+<hr>
+<h2 id="permissions">Permissions</h2>
+<ul>
+<li><a href="#behavior-components">Back to Section Contents</a></li>
+<li><a href="https://developer.android.com/guide/topics/permissions/overview">Android Documentation</a></li>
+<li><a href="https://developer.android.com/training/permissions/declaring">Declare Permissions</a></li>
+<li><a href="https://developer.android.com/training/permissions/requesting">Request Permissions</a></li>
+<li><a href="https://developer.android.com/reference/android/Manifest.permission">List of Permissions</a></li>
+</ul>
+<hr>
+<p><strong>Permissions</strong> are a set of systems used to grant applications permission to access restricted data and actions by either declaring permissions in the Android Manifest or by requesting them at runtime. Types of permissions include:</p>
+<p><strong>Normal Permissions</strong>, <em>Low Risk</em> (<a href="https://developer.android.com/guide/topics/permissions/overview#normal">Android Documentation</a>)</p>
+<p><strong>Signature Permissions</strong>, <em>App Specific</em> (<a href="https://developer.android.com/guide/topics/permissions/overview#signature">Android Documentation</a>)</p>
+<p><strong>Runtime Permissions</strong>, <em>High Risk</em> (<a href="https://developer.android.com/guide/topics/permissions/overview#runtime">Android Documentation</a>)</p>
+<p><strong>Special Permissions</strong>, <em>Platform/OEM Specific</em> (<a href="https://developer.android.com/guide/topics/permissions/overview#special">Android Documentation</a>)</p>
+<hr>
+<h2 id="notifications">Notifications</h2>
+<ul>
+<li><a href="#behavior-components">Back to Section Contents</a></li>
+<li><a href="https://developer.android.com/guide/topics/ui/notifiers/notifications">Android Documentation</a></li>
+</ul>
+<hr>
+<p><strong>Notifications</strong> libraries provide a way to use push notifications and assign special system actions to notifications like vibrations, sounds, and status bar icons.</p>
+<hr>
+<h2 id="sharing">Sharing</h2>
+<ul>
+<li><a href="#behavior-components">Back to Section Contents</a></li>
+<li><a href="https://developer.android.com/training/sharing/send">Simple Data</a></li>
+<li><a href="https://developer.android.com/reference/kotlin/androidx/appcompat/widget/ShareActionProvider">ShareActionProvider</a></li>
+</ul>
+<hr>
+<p><strong>Sharing</strong> provides a way to share data with other applications through Intent.</p>
+<hr>
+<h2 id="slices">Slices</h2>
+<ul>
+<li><a href="#behavior-components">Back to Section Contents</a></li>
+<li><a href="https://developer.android.com/guide/slices">Android Documentation</a></li>
+</ul>
+<hr>
+<p><strong>Slices</strong> are UI templates that can display interactive content from an application inside other applications like Google Search and Google Assistant.</p>
+<hr>
+<h1 id="ui-components">UI Components</h1>
+<ul>
+<li><a href="#jetpack-software-components">Back to Top</a></li>
+<li><a href="#foundation-components">Foundation Components</a></li>
+<li><a href="#architecture-components">Architecture Components</a></li>
+<li><a href="#behavior-components">Behavior Components</a></li>
+</ul>
+<br>
+<ul>
+<li><a href="https://www.geeksforgeeks.org/ui-components-of-android-jetpack/">Geeks for Geeks</a></li>
+</ul>
+<hr>
+<ul>
+<li><a href="#animation--transition">Animation &amp; Transition</a></li>
+<li><a href="#auto">Auto</a></li>
+<li><a href="#emoji">Emoji</a></li>
+<li><a href="#fragment">Fragment</a></li>
+<li><a href="#layout">Layout</a></li>
+<li><a href="#palette">Palette</a></li>
+<li><a href="#tv">TV</a></li>
+<li><a href="#wear">Wear</a></li>
+</ul>
+<hr>
+<p><strong>UI Components</strong> are a set of libraries which deal with UI and contain widgets, layouts, animations, palettes, and emojis, as well as support for driving mode, Android TV, and Wear OS.</p>
+<hr>
+<h2 id="animation--transition">Animation &amp; Transition</h2>
+<ul>
+<li><a href="#ui-components">Back to Section Contents</a></li>
+</ul>
+<hr>
+<hr>
+<h2 id="auto">Auto</h2>
+<ul>
+<li><a href="#ui-components">Back to Section Contents</a></li>
+</ul>
+<hr>
+<hr>
+<h2 id="emoji">Emoji</h2>
+<ul>
+<li><a href="#ui-components">Back to Section Contents</a></li>
+</ul>
+<hr>
+<hr>
+<h2 id="fragment">Fragment</h2>
+<ul>
+<li><a href="#ui-components">Back to Section Contents</a></li>
+</ul>
+<hr>
+<hr>
+<h2 id="layout">Layout</h2>
+<ul>
+<li><a href="#ui-components">Back to Section Contents</a></li>
+</ul>
+<hr>
+<hr>
+<h2 id="palette">Palette</h2>
+<ul>
+<li><a href="#ui-components">Back to Section Contents</a></li>
+</ul>
+<hr>
+<hr>
+<h2 id="tv">TV</h2>
+<ul>
+<li><a href="#ui-components">Back to Section Contents</a></li>
+</ul>
+<hr>
+<hr>
+<h2 id="wear">Wear</h2>
+<ul>
+<li><a href="#ui-components">Back to Section Contents</a></li>
+</ul>
+<hr>
+
+</body>
+</html>
